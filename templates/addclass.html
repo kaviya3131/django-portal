@@ -1,0 +1,425 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+* {box-sizing: border-box}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 50%; /* Full width */
+  height: 50%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 100px) {
+  .cancelbtn, .deletebtn {
+    width: 50%;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+</style>
+<script>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Add Class</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Delete Class</a>
+  </li>
+  
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+  <center>
+  <style>
+  #one
+{
+  margin-top:50px;
+ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+}
+.it .btn-orange
+{
+	background-color: transparent;
+	border-color: #777!important;
+	color: #777;
+	text-align: left;
+  width:100%;
+}
+.it input.form-control
+{
+	height: 54px;
+	border:none;
+  margin-bottom:0px;
+	border-radius: 0px;
+	border-bottom: 1px solid #ddd;
+	box-shadow: none;
+}
+.it .form-control:focus
+{
+	border-color: #ff4d0d;
+	box-shadow: none;
+	outline: none;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.it .btn-new, .it .btn-next
+{
+	margin: 30px 0px;
+	border-radius: 0px;
+	background-color: #333;
+	color: #f5f5f5;
+	font-size: 16px;
+	width: 155px;
+}
+.it .btn-next
+{
+	background-color: #ff4d0d;
+	color: #fff;
+}
+.it .btn-check
+{
+  cursor:pointer;
+  line-height:54px;
+  color:red;
+}
+.it .uploadDoc
+{
+	margin-bottom: 20px;
+}
+.it .uploadDoc
+{
+	margin-bottom: 20px;
+}
+.it .btn-orange img {
+    width: 30px;
+}
+p
+{
+  font-size:16px;
+  text-align:center;
+  margin:30px 0px;
+}
+.it #uploader .docErr
+{
+	position: absolute;
+    right:auto;
+    left: 10px;
+    top: -56px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    color: red;
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+    display: none;
+}
+.it #uploader .docErr:after
+{
+	content: '\f0d7';
+	display: inline-block;
+	font-family: FontAwesome;
+	font-size: 50px;
+	color: #fff;
+	position: absolute;
+	left: 30px;
+	bottom: -40px;
+	text-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+}
+  </style>
+  <script>
+  var fileTypes = ['pdf', 'docx', 'rtf', 'jpg', 'jpeg', 'png', 'txt'];  //acceptable file types
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
+            isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+
+        if (isSuccess) { //yes
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                if (extension == 'pdf'){
+                	$(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/179/179483.svg');
+                }
+                else if (extension == 'docx'){
+                	$(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/281/281760.svg');
+                }
+                else if (extension == 'rtf'){
+                	$(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/136/136539.svg');
+                }
+                else if (extension == 'png'){ $(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/136/136523.svg'); 
+                }
+                else if (extension == 'jpg' || extension == 'jpeg'){
+                	$(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/136/136524.svg');
+                }
+              else if (extension == 'txt'){
+                	$(input).closest('.fileUpload').find(".icon").attr('src','https://image.flaticon.com/icons/svg/136/136538.svg');
+                }
+                else {
+                	//console.log('here=>'+$(input).closest('.uploadDoc').length);
+                	$(input).closest('.uploadDoc').find(".docErr").slideUp('slow');
+                }
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+        		//console.log('here=>'+$(input).closest('.uploadDoc').find(".docErr").length);
+            $(input).closest('.uploadDoc').find(".docErr").fadeIn();
+            setTimeout(function() {
+				   	$('.docErr').fadeOut('slow');
+					}, 9000);
+        }
+    }
+}
+$(document).ready(function(){
+   
+   $(document).on('change','.up', function(){
+   	var id = $(this).attr('id'); /* gets the filepath and filename from the input */
+	   var profilePicValue = $(this).val();
+	   var fileNameStart = profilePicValue.lastIndexOf('\\'); /* finds the end of the filepath */
+	   profilePicValue = profilePicValue.substr(fileNameStart + 1).substring(0,20); /* isolates the filename */
+	   //var profilePicLabelText = $(".upl"); /* finds the label text */
+	   if (profilePicValue != '') {
+	   	//console.log($(this).closest('.fileUpload').find('.upl').length);
+	      $(this).closest('.fileUpload').find('.upl').html(profilePicValue); /* changes the label text */
+	   }
+   });
+
+   $(".btn-new").on('click',function(){
+        $("#uploader").append('<div class="row uploadDoc"><div class="col-sm-3"><div class="docErr">Please upload valid file</div><!--error--><div class="fileUpload btn btn-orange"> <img src="https://image.flaticon.com/icons/svg/136/136549.svg" class="icon"><span class="upl" id="upload">Upload document</span><input type="file" class="upload up" id="up" onchange="readURL(this);" /></div></div><div class="col-sm-8"><input type="text" class="form-control" name="" placeholder="Note"></div><div class="col-sm-1"><a class="btn-check"><i class="fa fa-times"></i></a></div></div>');
+   });
+    
+   $(document).on("click", "a.btn-check" , function() {
+     if($(".uploadDoc").length>1){
+        $(this).closest(".uploadDoc").remove();
+      }else{
+        alert("You have to upload at least one document.");
+      } 
+   });
+});
+  </script>
+
+  <div class="container"> 
+<div class="row it">
+<div class="col-sm-offset-1 col-sm-10" id="one">
+<p>
+Please upload only in spreadsheet format.
+</p><br>
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-4 form-group">
+    <h3 class="text-center">Add Class</h3>
+  </div><!--form-group-->
+</div><!--row-->
+<div id="uploader">
+<div class="row uploadDoc">
+  <div class="col-sm-3">
+    <div class="docErr">Please upload valid file</div><!--error-->
+    
+    </div><!-- btn-orange -->
+  </div><!-- col-3 -->
+    <form action="/post_addclass/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file"
+                   title="Upload excel file"
+                   name="excel_file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                   <div class="col-sm-8">
+                    <input type="text" class="form-control" name="class_name" placeholder="Class Name" required>      
+        </form>
+<centre>
+  
+  </div><!--col-8--></center>
+  <div class="col-sm-1"><a class="btn-check"><i class="fa fa-times"></i></a></div><!-- col-1 -->
+</div><!--row-->
+</div><!--uploader-->
+<div class="text-center">
+<a class="btn btn-new"><i class="fa fa-plus"></i> Add new</a>
+<a class="btn btn-next"><i class="fa fa-paper-plane"></i> Submit</a>
+</div>
+</div><!--one-->
+</div><!-- row -->
+</div><!-- container -->
+  </centre>
+
+  </div>
+  
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><center>
+  
+  <button onclick="document.getElementById('id01').style.display='block'">CSE - B</button>
+  <button onclick="document.getElementById('id01').style.display='block'">CSE - C</button>
+   <button onclick="document.getElementById('id01').style.display='block'">ECE - A</button>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>Delete Class</h1>
+      <p>Are you sure you want to delete your Class?</p>
+
+      <div class="clearfix">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="deletebtn">Delete</button>
+      </div>
+    </div>
+  </form>
+</div>
+  </center></div>
+ 
+</div>
+{% endblock %}
+

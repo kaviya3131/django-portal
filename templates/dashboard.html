@@ -1,0 +1,172 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<style>body{
+  background-color: #333
+}
+
+.task{
+  margin:10px auto;
+  width: 400px;
+}
+
+.task #list{
+  list-style: none;
+  width: 308px;
+  padding: 0;
+  line-height: 50px;
+  font-weight: bold;
+}
+
+.task li{
+  position: relative;
+  text-indent: 9px;
+  color: #333;
+  background-color: #DDD;
+  margin-bottom: 10px;
+}
+
+.task li > span{
+  top: 14px;
+  position: absolute;
+  left: 280px;
+  cursor: pointer;
+}
+
+.add{position: relative;padding-top: 10px}
+
+.add #inputAdd{
+  color: #FFF;
+  background-color: darkcyan;
+  width: 308px;
+  height: 52px;
+  font-size: 15px;
+  border-radius: 3px;
+  text-indent: 9px;
+  font-weight: bold;
+  border: none;
+  display: none;
+}
+
+.add ::placeholder{color: #DDD}
+
+.add #send{
+  border-radius: 50%;
+  height: 40px;
+  border: none;
+  width: 40px;
+  position: absolute;
+  right: 70px;
+  top: 17px;
+  background: #DDD;
+  color: #333;
+  cursor: pointer;
+  display: none;
+}
+
+.add span{
+    border-radius: 50%;
+    height: 40px;
+    border: none;
+    width: 40px;
+    position: absolute;
+    right: 225px;
+    top: -39px;
+    background: darkcyan;
+    line-height: 40px;
+    color: #DDD;
+    cursor: pointer;
+    text-align: center;
+}
+
+/*Add mytitle*/
+.add button:hover{position: relative;}
+.add button[mytitle]:hover:after {
+   content: attr(mytitle);
+   padding: 4px 8px;
+   position: absolute;
+   left: 41px;
+   top: 9px;
+   white-space: nowrap;
+   background: #000;
+   color: #FFF;
+   border-radius: 5px;
+}
+
+.add #alrt1,
+.add #alrt2{
+    background-color: #e04b22;
+    width: 60%;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    display: none;
+    white-space: nowrap;
+}
+</style>
+<script>$(document).ready(function(){
+  $('#add-icon').click(function(){
+    if($('#inputAdd').css('display') == 'none' ){
+      $('#inputAdd, #send').css('display', 'block');
+      $('.add span').addClass('fa-minus').removeClass('fa-plus');
+    } else {
+      $('#inputAdd, #send').css('display', 'none');
+      $('.add span').removeClass('fa-minus').addClass('fa-plus');
+    }
+  });
+
+// Remove li from list
+$('.fa-trash-o').click(function (){
+  $('#list li').remove();
+});
+
+//Anothr way to check text if empty
+/*function isEmpty( el ){
+      return !$.trim(el.html())
+  } */
+
+// Check input If Empty and Check Value input length Letter
+$('#send').click(function(){
+  if($('#inputAdd').val() =='' && $('#inputAdd').val().length <= 4){
+    $('#alrt1').fadeIn(3000).fadeOut(500);
+  }
+
+  // Check Value input length Letter
+  if($('#inputAdd').val().length <= 4){
+    $('#alrt2').fadeIn(3000).fadeOut(500);
+  } else {
+    $("#list").append('<li>' + $('#inputAdd').val() + '<span class="delete fa fa-trash-o" onclick="myFunc(this)"></span>' + '</li>');
+    $('#inputAdd').val(""); // clear input value default
+  }
+});});
+
+
+// for ignore error that appear in console browser
+function myFunc(elem) {
+  let li = elem.parentNode;
+  li.parentNode.removeChild(li);
+}
+</script>
+<center><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<br><br><br><center><h1>Welcome!</h1></center>
+<div class="task">
+  <ul id="list">
+   <li>TO - DO <span class="delete fa fa-trash-o" onclick="myFunc(this)"></span>      </li>
+  </ul>
+ <div class="add">
+  <input type="text" id="inputAdd" placeholder="Write text here...">
+  <button id="send" mytitle="Add Item">Add</button>
+  <span id="add-icon" class="fa fa-plus">    </span>
+  <p id="alrt1">Write Something <i class="fa fa-exclamation-circle"></i></p>
+  <p id="alrt2">Write At Least 5 Letter <i class="fa fa-exclamation-circle"></i></p>
+ </div>
+</div>
+
+<script     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+</center>
+{% endblock %}

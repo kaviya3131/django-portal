@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+<br><br><br>
+<input type="file" class="button" value="Input Button">
+<img id="myImg" src="https://www.canterbury.ac.nz/media/images/timetables/untitled9.jpg" alt="your image" />
+<center>
+<style>
+<div style='position:fixed;bottom:0;left:0;    
+            background:lightgray;width:100%;'>
+    About this SO Question <a href='http://stackoverflow.com/q/19866677/1366033'>A button for Open Dialog Box using HTML and JQuery</a><br/>
+<div>
+</style>
+<script>
+
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+    $('#myImg').attr('src', e.target.result);
+};
+</script>
+{% endblock %}

@@ -1,0 +1,583 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+* {box-sizing: border-box}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 50%; /* Full width */
+  height: 50%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 100px) {
+  .cancelbtn, .deletebtn {
+    width: 50%;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+</style>
+<script>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">CSE - B</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">CSE - C</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">CSE - D</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+  <center>
+  <table class="table table-bordered table-striped" id="gradeTable">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="checkbox-col"><input class="form-control" type="checkbox" id="select-all" /></th>
+      <th scope="col" class="name-col sortable" data-field="name">Name <span class="sort-arrow"></span></th>
+      <th scope="col" class="grade-col sortable" data-field="grade">ROLL no:<span class="sort-arrow"></span></th>
+      <th scope="col" class="options-col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="checkbox-col"><i class="fas fa-trash-alt" id="delete-all-checked-btn"></i></td>
+      <td><input type="text" form="studentForm" id="name-field" name="name" class="form-control" placeholder="Student Name" required /></td>
+      <td class="grade-col"><input type="number" form="studentForm" name="grade" class="form-control" placeholder="Roll no." id="grade-field" required />
+        <button type="submit" form="studentForm" class="btn btn-success">+</button></td>
+      
+    </tr>
+  </tfoot>
+</table>
+<form id="studentForm"></form>
+<a href="#" class="button">Save Changes</a>
+</center>
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#gradeTable {
+  width: 75%;
+  margin: 0 auto;
+}
+
+th.name-col, th.grade-col {
+  cursor: pointer;
+}
+
+#gradeTable .checkbox-col {
+  width: 80px;
+  text-align: center;
+}
+
+#gradeTable .checkbox-col input {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: auto;
+}
+
+#gradeTable .grade-col {
+  text-align: right;
+  width: 180px;
+}
+
+#gradeTable .grade-col input {
+  display: inline-block;
+  width: 100px;
+}
+
+#gradeTable .options-col {
+  width: 60px;
+  text-align: center;
+}
+
+#delete-all-checked-btn {
+  color: red;
+  font-size: 25px;
+  line-height: 35px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.delete-row-btn {
+  color: red;
+  font-size: 20px;
+}
+
+.grade-pass {
+  background: #5CC573;
+  color: #023A14;
+}
+
+.grade-fail {
+  background: #c55c68;
+  color: #e8d5d7;
+}
+
+.editable {
+  cursor: pointer;
+}
+</style>
+<script>
+let table;
+let tbody;
+let selectAllCheckbox;
+let averageContainer;
+let passingGrade = 65;
+let students = [
+  {
+      "name": "Puckett Reed",
+      "grade": "4324324"
+    },
+    {
+      "name": "Hodges Hebert",
+      "grade": "1432432"
+    },
+    
+    {
+      "name": "Ortega Frazier",
+      "grade": "4324324"
+    },
+    {
+      "name": "Tammi Mooney",
+      "grade": "54332432"
+    },
+    {
+      "name": "Mabel Macias",
+      "grade": "432324"
+    },
+    {
+      "name": "Mariana Hanson",
+      "grade": "4324324"
+    },
+    {
+      "name": "Keller Roberson",
+      "grade": "547567"
+    },
+    {
+      "name": "Medina Mercado",
+      "grade": "5464564"
+    }
+];
+
+const validators = [
+  function(data) {
+    if(data.name.indexOf(' ') > -1) return true;
+    return {
+      field: 'name',
+      message: 'Name needs to have first and last names'
+    };
+  },
+  function(data) {
+    const grade = parseFloat(data.grade);
+    if(grade < 0 || grade > 100) {
+      return {
+        field: 'grade',
+        message: 'Grade needs to be between 0 and 100'
+      }
+    }
+    
+    return true;
+  }
+]
+
+function addRow(student) {
+  tbody.append(studentRowTemplate(student));
+}
+
+function studentRowTemplate(student) {
+  const gradeClass = (parseFloat(student.grade) > passingGrade) ? 'grade-pass' : 'grade-fail';
+  return `<tr>
+      <td class="checkbox-col"><input class="form-control row-checkbox" type="checkbox" /></td>
+      <td class="name-col"><span class="editable" data-field="name">${student.name}</span></td>
+      <td class="grade-col ${gradeClass}"><span class="editable" data-field="grade">${student.grade}</span></td>
+      <td class="options-col"><i class="fas fa-minus-circle delete-row-btn"></i></td>
+    </tr>`;
+}
+
+function calculateAverage() {
+  let total = 0;
+  for(let i = 0; i < students.length; i++) {
+    total += parseFloat(students[i].grade);
+  }
+  if(total === 0) return 0;
+  return (total / students.length).toFixed(2);
+}
+
+function addStudent(student) {
+  students.push(student);
+  addRow(student);
+  averageContainer.text(calculateAverage());
+}
+
+function renderStudentTable() {
+  tbody.html('');
+  for(let i = 0; i < students.length; i++) {
+    addRow(students[i]);
+  }
+  
+  renderAverage();
+}
+
+function renderAverage() {
+  averageContainer.text(calculateAverage());
+}
+
+function checkRowSelectedStatus() {
+  const inputs = tbody.find('.row-checkbox');
+  let checkState = true;
+  
+  if(students.length > 0) {
+    for(let i = 0; i < inputs.length; i++) {
+      if(!inputs[i].checked) {
+        checkState = false;
+        break;
+      }
+    }
+  } else {
+    checkState = false;
+  }
+  
+  selectAllCheckbox[0].checked = checkState;
+}
+
+function getStudentRow(element) {
+  const row = $(element).closest('tr');
+  const studentIndex = row.index();
+  
+  return {
+    row: row,
+    studentIndex: studentIndex
+  }
+}
+
+$(function() {
+  const nameField = $('#name-field');
+  const gradeField = $('#grade-field');
+  table = $('#gradeTable');
+  tbody = table.find('tbody');
+  averageContainer = $('#average');
+  selectAllCheckbox = $('#select-all');
+    
+  $('th.sortable').on('click', function() {
+    const row = $(this).parent();
+    const field = $(this).attr('data-field');
+    let dir = ($(this).attr('data-dir'));
+    if(dir === undefined) {
+      dir = 1;
+    } else {
+      dir = parseInt(dir) * -1;
+    }
+    
+    students.sort(function(a, b) {
+      let aValue, bValue;
+      switch(field) {
+        case 'name':
+          aValue = a.name.toUpperCase();
+          bValue = b.name.toUpperCase();
+          if(aValue > bValue) return 1 * dir;
+          if(aValue < bValue) return -1 * dir;
+          return 0;
+          break;
+        case 'grade':
+          aValue = parseFloat(a.grade);
+          bValue = parseFloat(b.grade);
+          return dir * (aValue - bValue);
+      }
+    });
+    
+    renderStudentTable();
+    row.find('.sort-arrow').html('');
+    const icon = dir === 1 ? '<i class="fas fa-long-arrow-alt-down"></i>' :  '<i class="fas fa-long-arrow-alt-up"></i>';
+    $(this).find('.sort-arrow').html(icon);
+    $(this).attr('data-dir', dir);
+  })
+  
+  tbody.on('change', '.row-checkbox', function() {
+    checkRowSelectedStatus();
+  });
+  
+  tbody.on('click', '.editable', function() {
+    const {row, studentIndex} = getStudentRow(this);
+    const student = students[studentIndex];
+    const field = $(this).attr('data-field');
+    
+    const inputType = field === 'name' ? 'text' : 'number';
+    const newInput = $(`<input type="${inputType}" id="editable-input" class="form-control" value="${student[field]}" />`);
+    
+    const generateSpan = function(data) {
+      return `<span class="editable" data-field="${field}">${data}</span>`
+    }
+
+    const td = $(this).parent();
+        
+    td.html(newInput);
+    newInput.trigger('focus');
+    newInput
+      .on('blur', function() {
+        newInput.remove();
+        student[field] = newInput.val().trim();
+        students[studentIndex] = student;
+        if(field === 'grade') {
+          td.removeClass('grade-pass').removeClass('grade-fail');
+          const gradeClass = student.grade > passingGrade ? 'grade-pass' : 'grade-fail';
+          td.addClass(gradeClass);
+          renderAverage();
+        }
+        td.html(generateSpan(student[field]));
+      })
+      .on('keydown', function(event) {
+        switch(event.keyCode) {
+          case 13: // enter
+            newInput.trigger('blur');
+            break;
+          case 27: // esc
+            newInput.remove();
+            td.html(generateSpan(student[field]));
+            break;
+        }
+      })
+  });
+  
+  tbody.on('click', '.delete-row-btn', function() {
+    const row = $(this).closest('tr');
+    const studentIndex = row.index();
+
+    students.splice(studentIndex, 1);
+    row.remove();
+    renderAverage();
+    checkRowSelectedStatus();
+  });
+  
+  table.on('click', 'tbody tr', function(e) {
+    if(!$(e.target).hasClass('row-checkbox')
+       && !$(e.target).hasClass('editable')
+       && !$(e.target).hasClass('form-control')
+      ) {
+      const checkbox = $(this).find('.row-checkbox');
+      checkbox.prop('checked', !checkbox.prop('checked'));
+      checkbox.trigger('change');
+    }
+  });
+  
+  students.forEach(function(student) {
+    addRow(student);
+    renderAverage();
+  });
+  
+  $('#studentForm').on('submit', function(event) {
+    event.preventDefault();
+    nameField.removeClass('is-invalid');
+    gradeField.removeClass('is-invalid');
+    
+    const formData = new FormData(event.target);
+    const data = {
+      name: formData.get('name').trim(),
+      grade: parseFloat(formData.get('grade'))
+    }
+    
+    const errors = [];
+    for(let i = 0; i < validators.length; i++) {
+      const result = validators[i](data);
+      if(result !== true) {
+        console.error(result.message);
+        if(result.field === 'name') {
+          nameField.addClass('is-invalid');
+        } else {
+          gradeField.addClass('is-invalid');
+        }
+        errors.push(result);
+      }
+    }
+    
+    if(errors.length > 0) {
+      return;
+    }
+    
+    addStudent(data);
+    
+    event.target.reset();
+  });
+  
+  selectAllCheckbox.on('click', function(e) {
+    tbody.find('.row-checkbox').prop('checked', this.checked);
+  });
+  
+  $('#delete-all-checked-btn').on('click', function() {
+    let selectedIndices = [];
+
+    tbody.find('.row-checkbox:checked').each(function() {
+      selectedIndices.push($(this).closest('tr').index());
+    });
+    
+    for(let i = selectedIndices.length - 1; i >= 0; i--) {
+      students.splice(selectedIndices[i], 1);
+    }
+    
+    renderStudentTable();
+    checkRowSelectedStatus();
+  });
+});
+</script>
+</head>
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><center>CSE - C</center></div>
+</div>
+{% endblock %}
+
